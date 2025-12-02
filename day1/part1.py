@@ -3,30 +3,20 @@ passComb = []
 maxThreshold = 99
 startPosition = 50
 
-def readFile(file: str):
-    with open('D:\\Documentos\\GitHub\\aoc2025\\day1\\'+file, 'r') as file:
-        for line in file:
-            passComb.append(line.strip())
-
+with open('D:\\Documentos\\GitHub\\aoc2025\\day1\\'+"input.txt", 'r') as file:
+    for line in file: passComb.append(line.strip())
+    
 def getMovement(inputLine: str):
-    if inputLine.startswith("L"):
-        return -int(inputLine.replace("L", ""))
+    if inputLine.startswith("L"): return -int(inputLine.replace("L", ""))
     else: return int(inputLine.replace("R", ""))
-
-def operate(position: int, count: int):
-    return (position+count) % (maxThreshold + 1)
 
 def getPassword(combination: list):
     position = startPosition
     password = 0
 
     for inputLine in combination:
-        movement = getMovement(inputLine)
-        position = operate(position, movement)
-        if position == 0:
-            password += 1
+        position = (position+getMovement(inputLine)) % (maxThreshold + 1)
+        if position == 0: password += 1
     return password
 
-
-readFile("input.txt")
 print(getPassword(passComb))
