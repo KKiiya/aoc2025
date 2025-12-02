@@ -2,11 +2,10 @@ testPassComb = ["L68", "L30", "R48", "L5", "R60", "L55", "L1", "L99", "R14", "L8
 passComb = []
 minThreshold = 0
 maxThreshold = 99
-position = 50
-password = 0
+startPosition = 50
 
 def readFile(file: str):
-    with open('c:\\Users\\Alumno\\Documents\\Git\\aoc2025\\day1\\'+file, 'r') as file:
+    with open('D:\\Documentos\\GitHub\\aoc2025\\day1\\'+file, 'r') as file:
         for line in file:
             passComb.append(line.strip())
 
@@ -15,35 +14,20 @@ def getMovement(inputLine: str):
         return -int(inputLine.replace("L", ""))
     else: return int(inputLine.replace("R", ""))
 
-def stabilize(num):
-    newNum = 0
-    if num > maxThreshold:
-        newNum -= maxThreshold
-        stabilize(newNum)
-    if num < minThreshold:
-        newNum += maxThreshold
-        stabilize(newNum)
-    return num
-
-def operate(count: int):
-    global position
-    global password
-    position += count
-    if position < minThreshold:
-        position = stabilize(maxThreshold + (position - minThreshold + 1))
-        print(f"Position wrapped below minThreshold: position = {position}")
-    elif position > maxThreshold:
-        position = stabilize(minThreshold + (position - maxThreshold) - 1)
-    if position == 0:
-        password += 1
-        print("Position pointed at 0. Pointed times: ", password)
+def operate(position: int, count: int):
+    return (position+count) % (maxThreshold + 1)
 
 def getPassword(combination: list):
-    for inputLine in(combination):
-        quantity = getMovement(inputLine)
-        operate(quantity)
+    position = startPosition
+    password = 0
+
+    for inputLine in combination:
+        movement = getMovement(inputLine)
+        position = operate(position, movement)
+        if position == 0:
+            password += 1
+    return password
 
 
 readFile("input.txt")
-getPassword(passComb)
-print(password)
+print(getPassword(passComb))
