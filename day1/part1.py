@@ -1,9 +1,12 @@
+import os
+
+directory = os.getcwd()+"\\day1\\"
 testPassComb = ["L68", "L30", "R48", "L5", "R60", "L55", "L1", "L99", "R14", "L82"]
 passComb = []
 maxThreshold = 99
 startPosition = 50
 
-with open('D:\\Documentos\\GitHub\\aoc2025\\day1\\'+"input.txt", 'r') as file:
+with open(directory+'input.txt', 'r') as file:
     for line in file: passComb.append(line.strip())
     
 def getMovement(inputLine: str):
