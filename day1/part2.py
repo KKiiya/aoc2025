@@ -18,8 +18,14 @@ def getPassword(combination: list):
     password = 0
 
     for inputLine in combination:
-        position = (position+getMovement(inputLine)) % (maxThreshold + 1)
-        if position == 0: password += 1
+        movement = getMovement(inputLine)
+        prePosition = position + movement
+        position = prePosition % (maxThreshold + 1)
+        
+        if movement < 0:
+
+        else:
+            
     return password
 
-print(getPassword(passComb))
+print(getPassword(testPassComb))
