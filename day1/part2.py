@@ -24,7 +24,6 @@ def getPassword(combination: list):
             for i in range(abs(movement)):
                 position -= 1
                 
-                
                 if position < 0: position = maxThreshold
                 if position == 0: password += 1
         else:
@@ -35,7 +34,7 @@ def getPassword(combination: list):
                     password += 1
                     position = 0
         
-        print("The dial is rotated", inputLine, "to point at", position)
+        #print("The dial is rotated", inputLine, "to point at", position)
     return password
 
 print(getPassword(passComb))
