@@ -19,11 +19,11 @@ def getInvalidIds(idsRangeList: list) -> int:
         initial = int(idRange[0])
         final = int(idRange[1])
 
-        for i in range(initial, final+1, 1):
-            if not (i > final):
-                s1 = str(i)
-                s2, s3 = s1[:len(s1)//2 + len(s1)%2], s1[len(s1)//2 + len(s1)%2:]
-                if s2 == s3: invalidIds+=int(s1)
+        for i in range(initial, final, 1):
+            s1 = str(i)
+            s2, s3 = s1[:len(s1)//2 + len(s1)%2], s1[len(s1)//2 + len(s1)%2:]
+            if s2 == s3: invalidIds+=int(s1)
+                
     return invalidIds
 
 
